@@ -31,3 +31,15 @@ for k = 1:a.NumberOfFrames;
     BWfinal = imerode(BWfinal,seD);
     binary{k}=BWfinal;
 end
+
+% Applying boolean operation(OR) to each frame in the binary clip 
+for i = 1:a.NumberOfFrames
+    if(i==1)
+        continue;
+    else
+        binary{i} = binary{i} | binary{i-1};
+    end
+end
+
+% Trail of the object is shown
+figure, imshow(binary{a.NumberOfFrames});
